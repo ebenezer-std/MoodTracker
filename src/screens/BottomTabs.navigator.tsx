@@ -13,10 +13,10 @@ export const BottomTabsNavigator: React.FC = () => {
             <BottomTabs.Screen name="Home" component={Home} />
             <BottomTabs.Screen name="History " component={History} />
             <BottomTabs.Screen name="Analytics" component={Analytics} />
-            <BottomTabs.Screen name="Analytics1" component={Analytics} />
+            {/* <BottomTabs.Screen name="Analytics1" component={Analytics} />
             <BottomTabs.Screen name="Analytics2" component={Analytics} />
             <BottomTabs.Screen name="Analytics3" component={Analytics} />
-            <BottomTabs.Screen name="Analytics4" component={Analytics} />
+            <BottomTabs.Screen name="Analytics4" component={Analytics} /> */}
 
 
 

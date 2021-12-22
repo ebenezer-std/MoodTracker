@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native'
-import { BottomTabsNavigator } from '../screens/BottomTabs.navigator';
+import { BottomTabsNavigator } from './screens/BottomTabs.navigator';
 import { NavigationContainer } from '@react-navigation/native';
 
 export const App: React.FC = () => {
