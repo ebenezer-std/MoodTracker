@@ -4,15 +4,30 @@ import { MoodOptionType } from '../type';
 import { theme } from '../theme';
 
 const MoodOptions: MoodOptionType[] = [
-  { emoji: '🧑‍💻', description: 'studious' },
-  { emoji: '🤔', description: 'pensive' },
-  { emoji: '😊', description: 'happy' },
-  { emoji: '🥳', description: 'celebratory' },
-  { emoji: '😤', description: 'frustrated' },
+  { emoji: '🧑‍💻', description: 'Studious' },
+  { emoji: '🤔', description: 'Pensive' },
+  { emoji: '😊', description: 'Happy' },
+  { emoji: '🥳', description: 'Celebratory' },
+  { emoji: '😤', description: 'Frustrated' },
 ];
 
-export const MoodPicker: React.FC = () => {
+type MoodPickerProps = {
+  handleSelectedMood: (moodOption: MoodOptionType) => void;
+  
+};
+
+
+export const MoodPicker: React.FC<MoodPickerProps> = ({
+  handleSelectedMood,
+}) => {
   const [selectedmood, setSelectedMood] = useState<MoodOptionType>();
+
+  const handleSelect = React.useCallback(() => {
+    if (selectedmood) {
+      handleSelectedMood(selectedmood)
+      setSelectedMood(undefined)
+    }
+  },[selectedmood, handleSelectedMood])
 
   return (
     <View style={styles.container}>
@@ -20,7 +35,7 @@ export const MoodPicker: React.FC = () => {
       <View style={styles.moodStyle}>
         {MoodOptions.map((item, index) => {
           return (
-            <View>
+            <View key={item.description}>
               <Pressable
                 onPress={() => {
                   setSelectedMood(item);
@@ -31,9 +46,7 @@ export const MoodPicker: React.FC = () => {
                     ? styles.selectedMood
                     : undefined,
                 ]}>
-                <Text key={item.description} style={styles.moodSize}>
-                  {item.emoji}
-                </Text>
+                <Text style={styles.moodSize}>{item.emoji}</Text>
               </Pressable>
               <Text style={styles.description}>
                 {selectedmood?.description === item.description
@@ -43,8 +56,13 @@ export const MoodPicker: React.FC = () => {
             </View>
           );
         })}
+        {console.log(selectedmood)}
       </View>
-      <Pressable style={styles.btn}>
+      <Pressable
+        style={styles.btn}
+        onPress={
+         handleSelect
+        }>
         <Text style={styles.btnText}>Choose</Text>
       </Pressable>
     </View>
@@ -62,7 +80,7 @@ const styles = StyleSheet.create({
   },
   moodStyle: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   moodSize: {
     fontSize: 30,
